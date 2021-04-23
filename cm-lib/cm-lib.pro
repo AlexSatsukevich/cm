@@ -27,6 +27,8 @@ SOURCES += source/models/client.cpp \
     source/controllers/mastercontroller.cpp \
     source/data/datadecorator.cpp \
     source/data/datetimedecorator.cpp \
+    source/data/entity.cpp \
+    source/data/entitycollection.cpp \
     source/data/enumeratordecorator.cpp \
     source/data/intdecorator.cpp \
     source/data/stringdecorator.cpp \
@@ -39,6 +41,8 @@ HEADERS += \
     source/controllers/navigationcontroller.h \
     source/data/datadecorator.h \
     source/data/datetimedecorator.h \
+    source/data/entity.h \
+    source/data/entitycollection.h \
     source/data/enumeratordecorator.h \
     source/data/intdecorator.h \
     source/data/stringdecorator.h \
