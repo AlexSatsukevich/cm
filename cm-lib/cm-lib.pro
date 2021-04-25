@@ -32,7 +32,10 @@ SOURCES += source/models/client.cpp \
     source/data/enumeratordecorator.cpp \
     source/data/intdecorator.cpp \
     source/data/stringdecorator.cpp \
-    source/framework/command.cpp
+    source/framework/command.cpp \
+    source/models/address.cpp \
+    source/models/appointment.cpp \
+    source/models/contact.cpp
 
 HEADERS += \
     source/cm-lib_global.h \
@@ -47,7 +50,10 @@ HEADERS += \
     source/data/intdecorator.h \
     source/data/stringdecorator.h \
     source/framework/command.h \
-    source/models/client.h
+    source/models/address.h \
+    source/models/appointment.h \
+    source/models/client.h \
+    source/models/contact.h
 
 # Default rules for deployment.
 unix {
