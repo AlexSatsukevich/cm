@@ -4,3 +4,4 @@ NavigationBar 1.0 NavigationBar.qml
 
 CommandBar 1.0 CommandBar.qml
 CommandButton 1.0 CommandButton.qml
+StringEditorSingleLine 1.0 StringEditorSingleLine.qml
