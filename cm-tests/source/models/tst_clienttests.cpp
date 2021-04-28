@@ -30,6 +30,6 @@ void ClientTests::test_case1()
 
 }
 
-QTEST_APPLESS_MAIN(ClientTests)
+//QTEST_APPLESS_MAIN(ClientTests)
 
 #include "tst_clienttests.moc"

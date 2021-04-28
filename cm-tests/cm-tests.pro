@@ -19,6 +19,14 @@ CONFIG += c++14
 CONFIG += qt console warn_on depend_includepath testcase
 CONFIG -= app_bundle
 
-INCLUDEPATH += source
+INCLUDEPATH += source \
+    ../cm-lib/source
 
-SOURCES += source/models/tst_clienttests.cpp
+SOURCES += source/models/tst_clienttests.cpp \
+    source/controllers/mastercontrollertests.cpp \
+    source/main.cpp \
+    source/testsuite.cpp
+
+HEADERS += \
+    source/controllers/mastercontrollertests.h \
+    source/testsuite.h
