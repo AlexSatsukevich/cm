@@ -24,9 +24,17 @@ INCLUDEPATH += source \
 
 SOURCES += source/models/tst_clienttests.cpp \
     source/controllers/mastercontrollertests.cpp \
+    source/data/datetimedecoratortests.cpp \
+    source/data/enumeratordecoratortests.cpp \
+    source/data/intdecoratortests.cpp \
+    source/data/stringdecoratortests.cpp \
     source/main.cpp \
     source/testsuite.cpp
 
 HEADERS += \
     source/controllers/mastercontrollertests.h \
+    source/data/datetimedecoratortests.h \
+    source/data/enumeratordecoratortests.h \
+    source/data/intdecoratortests.h \
+    source/data/stringdecoratortests.h \
     source/testsuite.h
