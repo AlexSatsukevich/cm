@@ -22,13 +22,14 @@ CONFIG -= app_bundle
 INCLUDEPATH += source \
     ../cm-lib/source
 
-SOURCES += source/models/tst_clienttests.cpp \
+SOURCES += \
     source/controllers/mastercontrollertests.cpp \
     source/data/datetimedecoratortests.cpp \
     source/data/enumeratordecoratortests.cpp \
     source/data/intdecoratortests.cpp \
     source/data/stringdecoratortests.cpp \
     source/main.cpp \
+    source/models/clienttests.cpp \
     source/testsuite.cpp
 
 HEADERS += \
@@ -37,4 +38,5 @@ HEADERS += \
     source/data/enumeratordecoratortests.h \
     source/data/intdecoratortests.h \
     source/data/stringdecoratortests.h \
+    source/models/clienttest.h \
     source/testsuite.h

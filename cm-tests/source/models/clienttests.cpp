@@ -1,35 +1,190 @@
-#include <QtTest>
+#include "clienttest.h"
 
-// add necessary includes here
-
-class ClientTests : public QObject
-{
-    Q_OBJECT
-
-public:
-    ClientTests();
-    ~ClientTests();
-
-private slots:
-    void test_case1();
-
-};
+namespace cm {
+namespace models {
 
 ClientTests::ClientTests()
 {
-
 }
 
-ClientTests::~ClientTests()
+void ClientTests::constructor_givenParent_setsParentAndDefaultProperties()
+{
+    Client testClient(this);
+    QCOMPARE(testClient.parent(), this);
+    QCOMPARE(testClient.reference->value(), QString(""));
+    QCOMPARE(testClient.name->value(), QString(""));
+    verifyDefaultBillingAddress(testClient.billingAddress);
+    verifyDefaultSupplyAddress(testClient.supplyAddress);
+    verifyDefaultAppointments(testClient.appointments->derivedEntities());
+    verifyDefaultContacts(testClient.contacts->derivedEntities());
+}
+
+void ClientTests::constructor_givenParentAndJsonObject_setsParentAndProperties()
+{
+    Client testClient(this, QJsonDocument::fromJson(jsonByteArray).object());
+    QCOMPARE(testClient.parent(), this);
+    QCOMPARE(testClient.reference->value(), QString("CM0001"));
+    QCOMPARE(testClient.name->value(), QString("Mr Test Testerson"));
+    verifyBillingAddress(testClient.billingAddress);
+    verifySupplyAddress(testClient.supplyAddress);
+    verifyAppointments(testClient.appointments->derivedEntities());
+    verifyContacts(testClient.contacts->derivedEntities());
+}
+
+void ClientTests::toJson_withDefaultProperties_constructsJson()
+{
+    Client testClient(this);
+    QJsonDocument jsonDoc(testClient.toJson());
+    QVERIFY(jsonDoc.isObject());
+    QJsonObject jsonObject = jsonDoc.object();
+    QVERIFY(jsonObject.contains("reference"));
+    QCOMPARE(jsonObject.value("reference").toString(), QString(""));
+    QVERIFY(jsonObject.contains("name"));
+    QCOMPARE(jsonObject.value("name").toString(), QString(""));
+    verifyDefaultBillingAddress(jsonObject);
+    verifyDefaultSupplyAddress(jsonObject);
+    verifyDefaultAppointments(jsonObject);
+    verifyDefaultContacts(jsonObject);
+}
+
+void ClientTests::toJson_withSetProperties_constructsJson()
+{
+    Client testClient(this, QJsonDocument::fromJson(jsonByteArray).object());
+    QCOMPARE(testClient.reference->value(), QString("CM0001"));
+    QCOMPARE(testClient.name->value(), QString("Mr Test Testerson"));
+    verifyBillingAddress(testClient.billingAddress);
+    verifySupplyAddress(testClient.supplyAddress);
+    verifyAppointments(testClient.appointments->derivedEntities());
+    verifyContacts(testClient.contacts->derivedEntities());
+    QJsonDocument jsonDoc(testClient.toJson());
+    QVERIFY(jsonDoc.isObject());
+    QJsonObject jsonObject = jsonDoc.object();
+    QVERIFY(jsonObject.contains("reference"));
+    QCOMPARE(jsonObject.value("reference").toString(), QString("CM0001"));
+    QVERIFY(jsonObject.contains("name"));
+    QCOMPARE(jsonObject.value("name").toString(), QString("Mr Test Testerson"));
+    verifyBillingAddress(jsonObject);
+    verifySupplyAddress(jsonObject);
+    verifyAppointments(jsonObject);
+    verifyContacts(jsonObject);
+}
+
+void ClientTests::update_givenJsonObject_updatesProperties()
+{
+    Client testClient(this);
+    testClient.update(QJsonDocument::fromJson(jsonByteArray).object());
+    QCOMPARE(testClient.reference->value(), QString("CM0001"));
+    QCOMPARE(testClient.name->value(), QString("Mr Test Testerson"));
+    verifyBillingAddress(testClient.billingAddress);
+    verifySupplyAddress(testClient.supplyAddress);
+    verifyAppointments(testClient.appointments->derivedEntities());
+    verifyContacts(testClient.contacts->derivedEntities());
+}
+
+void ClientTests::update_givenEmptyJsonObject_updatesPropertiesToDefaults()
+{
+    Client testClient(this, QJsonDocument::fromJson(jsonByteArray).object());
+    QCOMPARE(testClient.reference->value(), QString("CM0001"));
+    QCOMPARE(testClient.name->value(), QString("Mr Test Testerson"));
+    verifyBillingAddress(testClient.billingAddress);
+    verifySupplyAddress(testClient.supplyAddress);
+    verifyAppointments(testClient.appointments->derivedEntities());
+    verifyContacts(testClient.contacts->derivedEntities());
+    testClient.update(QJsonObject());
+    QCOMPARE(testClient.reference->value(), QString(""));
+    QCOMPARE(testClient.name->value(), QString(""));
+    verifyDefaultBillingAddress(testClient.billingAddress);
+    verifyDefaultSupplyAddress(testClient.supplyAddress);
+    verifyDefaultAppointments(testClient.appointments->derivedEntities());
+    verifyDefaultContacts(testClient.contacts->derivedEntities());
+}
+
+void ClientTests::verifyBillingAddress(const QJsonObject &jsonObject)
 {
 
 }
 
-void ClientTests::test_case1()
+void ClientTests::verifyDefaultBillingAddress(const QJsonObject &jsonObject)
 {
 
 }
 
-//QTEST_APPLESS_MAIN(ClientTests)
+void ClientTests::verifyBillingAddress(Address *address)
+{
 
-#include "tst_clienttests.moc"
+}
+
+void ClientTests::verifyDefaultBillingAddress(Address *address)
+{
+    QVERIFY(address != nullptr);
+    QCOMPARE(address->building->value(), QString(""));
+    QCOMPARE(address->street->value(), QString(""));
+    QCOMPARE(address->city->value(), QString(""));
+    QCOMPARE(address->postcode->value(), QString(""));
+}
+
+void ClientTests::verifySupplyAddress(const QJsonObject &jsonObject)
+{
+
+}
+
+void ClientTests::verifyDefaultSupplyAddress(const QJsonObject &jsonObject)
+{
+
+}
+
+void ClientTests::verifySupplyAddress(Address *address)
+{
+
+}
+
+void ClientTests::verifyDefaultSupplyAddress(Address *address)
+{
+    QVERIFY(address != nullptr);
+    QCOMPARE(address->building->value(), QString(""));
+    QCOMPARE(address->street->value(), QString(""));
+    QCOMPARE(address->city->value(), QString(""));
+    QCOMPARE(address->postcode->value(), QString(""));
+}
+
+void ClientTests::verifyAppointments(const QJsonObject &jsonObject)
+{
+
+}
+
+void ClientTests::verifyDefaultAppointments(const QJsonObject &jsonObject)
+{
+
+}
+
+void ClientTests::verifyAppointments(const QList<Appointment*> &appointments)
+{
+
+}
+
+void ClientTests::verifyDefaultAppointments(const QList<Appointment*> &appointments)
+{
+
+}
+
+void ClientTests::verifyContacts(const QJsonObject &jsonObject)
+{
+
+}
+
+void ClientTests::verifyDefaultContacts(const QJsonObject &jsonObject)
+{
+
+}
+
+void ClientTests::verifyContacts(const QList<Contact*> &contacts)
+{
+
+}
+
+void ClientTests::verifyDefaultContacts(const QList<Contact*> &contacts)
+{
+
+}
+
+}}
