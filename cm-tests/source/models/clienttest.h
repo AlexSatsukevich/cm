@@ -21,6 +21,9 @@ private slots:
     void toJson_withSetProperties_constructsJson();
     void update_givenJsonObject_updatesProperties();
     void update_givenEmptyJsonObject_updatesPropertiesToDefaults();
+    void id_givenPrimaryKeyWithNoValue_returnsUuid();
+    void id_givenPrimaryKeyWithValue_returnsPrimaryKey();
+
 private:
     void verifyBillingAddress(const QJsonObject& jsonObject);
     void verifyDefaultBillingAddress(const QJsonObject& jsonObject);

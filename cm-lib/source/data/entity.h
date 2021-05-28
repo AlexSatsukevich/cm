@@ -7,6 +7,8 @@
 #include <cm-lib_global.h>
 #include <data/datadecorator.h>
 #include <data/entitycollection.h>
+#include <data/stringdecorator.h>
+#include "controllers/idatabasecontroller.h"
 
 namespace cm {
 namespace data {
@@ -21,9 +23,10 @@ public:
     virtual ~Entity();
 
 public:
+    const QString id() const;
     const QString& key() const;
     void update(const QJsonObject& jsonObject);
-    QJsonObject toJson() const;
+    QJsonObject toJson() const;    
 
 signals:
     void childEntitiesChanged();
@@ -34,6 +37,7 @@ protected:
     Entity* addChild(Entity* entity, const QString& key);
     DataDecorator* addDataItem(DataDecorator* dataDecorator);
     EntityCollectionBase* addChildCollection(EntityCollectionBase* entityCollection);
+    void setPrimaryKey(StringDecorator*);
 
 protected:
     class Implementation;

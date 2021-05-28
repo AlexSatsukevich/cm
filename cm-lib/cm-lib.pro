@@ -2,6 +2,7 @@ include(../qmake-target-platform.pri)
 include(../qmake-destination-path.pri)
 
 QT -= gui
+QT += sql
 
 DESTDIR = $$PWD/../binaries/$$DESTINATION_PATH
 OBJECTS_DIR = $$PWD/build/$$DESTINATION_PATH/.obj
@@ -24,6 +25,7 @@ INCLUDEPATH += source
 
 SOURCES += source/models/client.cpp \
     source/controllers/commandcontroller.cpp \
+    source/controllers/databasecontroller.cpp \
     source/controllers/mastercontroller.cpp \
     source/data/datadecorator.cpp \
     source/data/datetimedecorator.cpp \
@@ -40,6 +42,8 @@ SOURCES += source/models/client.cpp \
 HEADERS += \
     source/cm-lib_global.h \
     source/controllers/commandcontroller.h \
+    source/controllers/databasecontroller.h \
+    source/controllers/idatabasecontroller.h \
     source/controllers/mastercontroller.h \
     source/controllers/navigationcontroller.h \
     source/data/datadecorator.h \
