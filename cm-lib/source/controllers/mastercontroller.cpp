@@ -11,11 +11,13 @@ public:
     Implementation(MasterController* _masterController)
         : masterController(_masterController)
     {
+        databaseController = new DatabaseController(masterController);
         navigationController = new NavigationController(masterController);
-        commandController = new CommandController(masterController);
         newClient = new Client(masterController);
+        commandController = new CommandController(masterController, databaseController, newClient);
     }
 
+    DatabaseController* databaseController{nullptr};
     MasterController* masterController{nullptr};
     NavigationController* navigationController{nullptr};
     CommandController* commandController{nullptr};
@@ -30,6 +32,11 @@ MasterController::MasterController(QObject *parent) : QObject(parent)
 
 MasterController::~MasterController()
 {
+}
+
+DatabaseController *MasterController::databaseController()
+{
+    return implementation->databaseController;
 }
 
 Client* MasterController::newClient()

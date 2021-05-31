@@ -5,6 +5,7 @@
 #include <QScopedPointer>
 
 #include <cm-lib_global.h>
+#include <controllers/databasecontroller.h>
 #include <controllers/commandcontroller.h>
 #include <controllers/navigationcontroller.h>
 #include <models/client.h>
@@ -16,6 +17,7 @@ class CMLIB_EXPORT MasterController : public QObject
 {
     Q_OBJECT
     Q_PROPERTY( QString ui_welcomeMessage READ welcomeMessage CONSTANT )
+    Q_PROPERTY( cm::controllers::DatabaseController* ui_databaseController READ databaseController CONSTANT )
     Q_PROPERTY( cm::controllers::NavigationController* ui_navigationController READ navigationController CONSTANT )
     Q_PROPERTY( cm::controllers::CommandController* ui_commandController READ commandController CONSTANT )
     Q_PROPERTY( cm::models::Client* ui_newClient READ newClient CONSTANT )
@@ -23,6 +25,8 @@ class CMLIB_EXPORT MasterController : public QObject
 public:
     explicit MasterController(QObject *parent = nullptr);
     ~MasterController();
+
+    DatabaseController* databaseController();
     NavigationController* navigationController();
     CommandController* commandController();
     const QString& welcomeMessage() const;
