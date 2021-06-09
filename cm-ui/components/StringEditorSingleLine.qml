@@ -12,7 +12,7 @@ Item {
         Rectangle {
             width: Style.widthDataControls
             height: Style.heightDataControls
-            color: Style.colourBackground
+            color: Style.colourPanelBackground
             Text {
                 id: textLabel
                 anchors {
