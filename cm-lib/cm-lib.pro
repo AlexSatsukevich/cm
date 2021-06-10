@@ -37,6 +37,7 @@ SOURCES += source/models/client.cpp \
     source/framework/command.cpp \
     source/models/address.cpp \
     source/models/appointment.cpp \
+    source/models/clientsearch.cpp \
     source/models/contact.cpp
 
 HEADERS += \
@@ -57,6 +58,7 @@ HEADERS += \
     source/models/address.h \
     source/models/appointment.h \
     source/models/client.h \
+    source/models/clientsearch.h \
     source/models/contact.h
 
 # Default rules for deployment.

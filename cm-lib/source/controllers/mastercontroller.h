@@ -9,6 +9,7 @@
 #include <controllers/commandcontroller.h>
 #include <controllers/navigationcontroller.h>
 #include <models/client.h>
+#include <models/clientsearch.h>
 
 namespace cm {
 namespace controllers {
@@ -21,6 +22,7 @@ class CMLIB_EXPORT MasterController : public QObject
     Q_PROPERTY( cm::controllers::NavigationController* ui_navigationController READ navigationController CONSTANT )
     Q_PROPERTY( cm::controllers::CommandController* ui_commandController READ commandController CONSTANT )
     Q_PROPERTY( cm::models::Client* ui_newClient READ newClient CONSTANT )
+    Q_PROPERTY( cm::models::ClientSearch* ui_clientSearch READ clientSearch CONSTANT )
 
 public:
     explicit MasterController(QObject *parent = nullptr);
@@ -32,6 +34,11 @@ public:
     const QString& welcomeMessage() const;
 
     models::Client *newClient();
+    models::ClientSearch *clientSearch();
+
+public slots:
+    void selectClient(cm::models::Client *client);
+
 private:
     class Implementation;
     QScopedPointer<Implementation> implementation;

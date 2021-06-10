@@ -14,7 +14,8 @@ public:
         databaseController = new DatabaseController(masterController);
         navigationController = new NavigationController(masterController);
         newClient = new Client(masterController);
-        commandController = new CommandController(masterController, databaseController, newClient);
+        clientSearch = new ClientSearch(masterController, databaseController);
+        commandController = new CommandController(masterController, databaseController, newClient, clientSearch);
     }
 
     DatabaseController* databaseController{nullptr};
@@ -23,6 +24,7 @@ public:
     CommandController* commandController{nullptr};
     QString welcomeMessage = "Welcome to the Client Management system!";
     Client* newClient{nullptr};
+    ClientSearch* clientSearch{nullptr};
 };
 
 MasterController::MasterController(QObject *parent) : QObject(parent)
@@ -42,6 +44,16 @@ DatabaseController *MasterController::databaseController()
 Client* MasterController::newClient()
 {
     return implementation->newClient;
+}
+
+ClientSearch *MasterController::clientSearch()
+{
+    return implementation->clientSearch;
+}
+
+void MasterController::selectClient(Client *client)
+{
+    emit implementation->navigationController->goEditClientView(client);
 }
 
 NavigationController* MasterController::navigationController()
