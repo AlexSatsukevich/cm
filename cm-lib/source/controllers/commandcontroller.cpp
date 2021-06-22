@@ -25,13 +25,19 @@ public:
         Command* findClientSearchCommand = new Command( commandController, QChar( 0xf002 ), "Search" );
         QObject::connect( findClientSearchCommand, &Command::executed, commandController, &CommandController::onFindClientSearchExecuted );
         findClientViewContextCommands.append( findClientSearchCommand );
+
+        Command* editClientSaveCommand = new Command( commandController, QChar( 0xf0c7 ), "Save" );
+        QObject::connect( editClientSaveCommand, &Command::executed, commandController, &CommandController::onEditClientSaveExecuted );
+        editClientViewContextCommands.append( editClientSaveCommand );
     }
 
     CommandController* commandController{nullptr};
     QList<Command*> createClientViewContextCommands{};
     QList<Command*> findClientViewContextCommands{};
+    QList<Command*> editClientViewContextCommands{};
     IDatabaseController* databaseController{nullptr};
     Client* newClient{nullptr};
+    Client* selectedClient{nullptr};
     ClientSearch* clientSearch{nullptr};
 };
 
@@ -55,6 +61,11 @@ QQmlListProperty<Command> CommandController::ui_findClientViewContextCommands()
     return QQmlListProperty<Command>(this, &implementation->findClientViewContextCommands);
 }
 
+QQmlListProperty<Command> CommandController::ui_editClientViewContextCommands()
+{
+    return QQmlListProperty<Command>(this, &implementation->editClientViewContextCommands);
+}
+
 void CommandController::onCreateClientSaveExecuted()
 {
     qDebug() << "You executed the Save command!";
@@ -70,6 +81,23 @@ void CommandController::onFindClientSearchExecuted()
     qDebug() << "You executed the Search command!";
 
     implementation->clientSearch->search();
+}
+
+void CommandController::onEditClientSaveExecuted()
+{
+    qDebug() << "You executed the Save command!";
+
+    implementation->databaseController->updateRow(
+                implementation->selectedClient->key(),
+                implementation->selectedClient->id(),
+                implementation->selectedClient->toJson());
+
+    qDebug() << "Updated client saved.";
+}
+
+void CommandController::setSelectedClient(Client *client)
+{
+    implementation->selectedClient = client;
 }
 
 }}
