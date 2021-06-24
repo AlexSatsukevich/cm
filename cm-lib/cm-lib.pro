@@ -2,7 +2,7 @@ include(../qmake-target-platform.pri)
 include(../qmake-destination-path.pri)
 
 QT -= gui
-QT += sql
+QT += sql network
 
 DESTDIR = $$PWD/../binaries/$$DESTINATION_PATH
 OBJECTS_DIR = $$PWD/build/$$DESTINATION_PATH/.obj
@@ -38,7 +38,8 @@ SOURCES += source/models/client.cpp \
     source/models/address.cpp \
     source/models/appointment.cpp \
     source/models/clientsearch.cpp \
-    source/models/contact.cpp
+    source/models/contact.cpp \
+    source/networking/networkaccessmanager.cpp
 
 HEADERS += \
     source/cm-lib_global.h \
@@ -59,7 +60,9 @@ HEADERS += \
     source/models/appointment.h \
     source/models/client.h \
     source/models/clientsearch.h \
-    source/models/contact.h
+    source/models/contact.h \
+    source/networking/inetworkaccessmanager.h \
+    source/networking/networkaccessmanager.h
 
 # Default rules for deployment.
 unix {
