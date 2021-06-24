@@ -5,6 +5,7 @@
 #include <QtQml/QQmlListProperty>
 #include <cm-lib_global.h>
 #include <framework/command.h>
+#include "navigationcontroller.h"
 #include "idatabasecontroller.h"
 #include "models/client.h"
 #include "models/clientsearch.h"
@@ -20,6 +21,7 @@ class CMLIB_EXPORT CommandController: public QObject
     Q_PROPERTY(QQmlListProperty<cm::framework::Command> ui_editClientViewContextCommands READ ui_editClientViewContextCommands CONSTANT)
 public:
     explicit CommandController(QObject* _parent = nullptr,
+                               NavigationController* _navigationController = nullptr,
                                IDatabaseController* _databaseController = nullptr,
                                models::Client* _newClient = nullptr,
                                models::ClientSearch* _clientSearch = nullptr);
@@ -33,6 +35,7 @@ public slots:
     void onCreateClientSaveExecuted();
     void onFindClientSearchExecuted();
     void onEditClientSaveExecuted();
+    void onEditClientDeleteExecuted();
 
     void setSelectedClient(cm::models::Client*);
 
