@@ -39,7 +39,8 @@ SOURCES += source/models/client.cpp \
     source/models/appointment.cpp \
     source/models/clientsearch.cpp \
     source/models/contact.cpp \
-    source/networking/networkaccessmanager.cpp
+    source/networking/networkaccessmanager.cpp \
+    source/networking/webrequest.cpp
 
 HEADERS += \
     source/cm-lib_global.h \
@@ -62,7 +63,9 @@ HEADERS += \
     source/models/clientsearch.h \
     source/models/contact.h \
     source/networking/inetworkaccessmanager.h \
-    source/networking/networkaccessmanager.h
+    source/networking/iwebrequest.h \
+    source/networking/networkaccessmanager.h \
+    source/networking/webrequest.h
 
 # Default rules for deployment.
 unix {

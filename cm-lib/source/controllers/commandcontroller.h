@@ -27,6 +27,7 @@ public:
                                models::ClientSearch* _clientSearch = nullptr);
 
     ~CommandController();
+
     QQmlListProperty<framework::Command> ui_createClientViewContextCommands();
     QQmlListProperty<framework::Command> ui_findClientViewContextCommands();
     QQmlListProperty<framework::Command> ui_editClientViewContextCommands();
