@@ -35,5 +35,6 @@ Window {
         function onGoDashboardView() { contentFrame.replace("qrc:/views/DashboardView.qml") }
         function onGoEditClientView(client) { contentFrame.replace("qrc:/views/EditClientView.qml", { selectedClient: client}) }
         function onGoFindClientView() { contentFrame.replace("qrc:/views/FindClientView.qml") }
+        function onGoRssView() { contentFrame.replace("qrc:/views/RssView.qml") }
     }
 }

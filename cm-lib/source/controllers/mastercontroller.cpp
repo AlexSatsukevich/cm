@@ -1,6 +1,11 @@
 #include "mastercontroller.h"
 
+#include "networking/networkaccessmanager.h"
+#include "networking/webrequest.h"
+
 using namespace cm::models;
+using namespace cm::networking;
+
 
 namespace cm {
 namespace controllers {
@@ -14,8 +19,22 @@ public:
         databaseController = new DatabaseController(masterController);
         navigationController = new NavigationController(masterController);
         newClient = new Client(masterController);
-        clientSearch = new ClientSearch(masterController, databaseController);
-        commandController = new CommandController(masterController, navigationController, databaseController, newClient, clientSearch);
+        clientSearch = new ClientSearch(masterController, databaseController);        
+
+        networkAccessManager = new NetworkAccessManager(masterController);
+        rssWebRequest = new WebRequest(masterController, networkAccessManager,
+                                       QUrl("http://feeds.bbci.co.uk/news/rss.xml?edition=uk"));
+
+        QObject::connect(rssWebRequest, &WebRequest::requestComplete,
+                         masterController, &MasterController::onRssReplyReceived);
+
+        commandController = new CommandController(
+                    masterController,
+                    navigationController,
+                    databaseController,
+                    newClient,
+                    clientSearch,
+                    rssWebRequest);
     }
 
     DatabaseController* databaseController{nullptr};
@@ -25,6 +44,8 @@ public:
     QString welcomeMessage = "Welcome to the Client Management system!";
     Client* newClient{nullptr};
     ClientSearch* clientSearch{nullptr};
+    NetworkAccessManager* networkAccessManager{nullptr};
+    WebRequest* rssWebRequest{nullptr};
 };
 
 MasterController::MasterController(QObject *parent) : QObject(parent)
@@ -54,6 +75,12 @@ ClientSearch *MasterController::clientSearch()
 void MasterController::selectClient(Client *client)
 {
     emit implementation->navigationController->goEditClientView(client);
+}
+
+void MasterController::onRssReplyReceived(int statusCode, QByteArray body)
+{
+    qDebug() << "Received RSS request response code " << statusCode << ":";
+    qDebug() << body;
 }
 
 NavigationController* MasterController::navigationController()

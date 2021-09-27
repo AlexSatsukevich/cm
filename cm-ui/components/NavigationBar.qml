@@ -50,6 +50,12 @@ Item {
                 hoverColour: "#8aef63"
                 onNavigationButtonClicked: masterController.ui_navigationController.goFindClientView();
             }
+            NavigationButton {
+                iconCharacter: "\uf09e"
+                description: "RSS Feed"
+                hoverColour: "#8acece"
+                onNavigationButtonClicked: masterController.ui_navigationController.goRssView();
+            }
         }
     }
 }
