@@ -14,52 +14,53 @@ namespace controllers {
 class MasterController::Implementation
 {
 public:
-    Implementation(MasterController* _masterController)
+    Implementation(MasterController* _masterController, framework::IObjectFactory *_objectFactory)
         : masterController(_masterController)
     {
-        databaseController = new DatabaseController(masterController);
-        navigationController = new NavigationController(masterController);
-        newClient = new Client(masterController);
-        clientSearch = new ClientSearch(masterController, databaseController);        
+        databaseController = _objectFactory->createDatabaseController(masterController);
+        navigationController = _objectFactory->createNavigationController(masterController);
+        newClient = _objectFactory->createClient(masterController);
+        clientSearch = _objectFactory->createClientSearch(masterController, databaseController);
 
-        networkAccessManager = new NetworkAccessManager(masterController);
+        networkAccessManager = _objectFactory->createNetworkAccessManager(masterController);
         rssWebRequest = new WebRequest(masterController, networkAccessManager,
                                        QUrl("http://feeds.bbci.co.uk/news/rss.xml?edition=uk"));
 
         QObject::connect(rssWebRequest, &WebRequest::requestComplete,
                          masterController, &MasterController::onRssReplyReceived);
 
-        commandController = new CommandController(
+        commandController = _objectFactory->createCommandController(
                     masterController,
-                    navigationController,
                     databaseController,
+                    navigationController,
                     newClient,
                     clientSearch,
                     rssWebRequest);
     }
 
-    DatabaseController* databaseController{nullptr};
+    IDatabaseController* databaseController{nullptr};
     MasterController* masterController{nullptr};
-    NavigationController* navigationController{nullptr};
-    CommandController* commandController{nullptr};
+    INavigationController* navigationController{nullptr};
+    ICommandController* commandController{nullptr};
     QString welcomeMessage = "Welcome to the Client Management system!";
     Client* newClient{nullptr};
     ClientSearch* clientSearch{nullptr};
-    NetworkAccessManager* networkAccessManager{nullptr};
+    INetworkAccessManager* networkAccessManager{nullptr};
     WebRequest* rssWebRequest{nullptr};
     RssChannel* rssChannel{nullptr};
 };
 
-MasterController::MasterController(QObject *parent) : QObject(parent)
+MasterController::MasterController(QObject *parent, framework::IObjectFactory *objectFactory)
+    : QObject(parent)
 {
-    implementation.reset(new Implementation(this));
+    implementation.reset(new Implementation(this, objectFactory));
 }
 
 MasterController::~MasterController()
 {
 }
 
-DatabaseController *MasterController::databaseController()
+IDatabaseController *MasterController::databaseController()
 {
     return implementation->databaseController;
 }
@@ -99,12 +100,12 @@ void MasterController::onRssReplyReceived(int statusCode, QByteArray body)
     emit rssChannelChanged();
 }
 
-NavigationController* MasterController::navigationController()
+INavigationController* MasterController::navigationController()
 {
     return implementation->navigationController;
 }
 
-CommandController *MasterController::commandController()
+ICommandController *MasterController::commandController()
 {
     return implementation->commandController;
 }

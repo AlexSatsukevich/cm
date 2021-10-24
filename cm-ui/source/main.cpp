@@ -2,6 +2,8 @@
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 #include <framework/command.h>
+#include <framework/iobjectfactory.h>
+#include <framework/objectfactory.h>
 #include <controllers/mastercontroller.h>
 #include <controllers/commandcontroller.h>
 #include <data/datetimedecorator.h>
@@ -19,9 +21,9 @@ int main(int argc, char *argv[])
 
     QGuiApplication app(argc, argv);
 
-    qmlRegisterType<cm::controllers::MasterController>("CM", 1, 0, "MasterController");
-    qmlRegisterType<cm::controllers::NavigationController>("CM", 1, 0, "NavigationController");
-    qmlRegisterType<cm::controllers::CommandController>("CM", 1, 0, "CommandController");
+    qmlRegisterUncreatableType<cm::controllers::MasterController>("CM", 1, 0, "MasterController", "Controller");
+    qmlRegisterUncreatableType<cm::controllers::INavigationController>("CM", 1, 0, "NavigationController", "Interface");
+    qmlRegisterUncreatableType<cm::controllers::ICommandController>("CM", 1, 0, "CommandController", "Interface");
     qmlRegisterType<cm::framework::Command>("CM", 1, 0, "Command");
     qmlRegisterType<cm::data::DatetimeDecorator>("CM", 1, 0, "DatetimeDecorator");
     qmlRegisterType<cm::data::EnumeratorDecorator>("CM", 1, 0, "EnumeratorDecorator");
@@ -36,7 +38,7 @@ int main(int argc, char *argv[])
     qmlRegisterType<cm::rss::RssImage>("CM", 1, 0, "RssImage");
     qmlRegisterType<cm::rss::RssItem>("CM", 1, 0, "RssItem");
 
-    cm::controllers::MasterController masterController;
+    cm::controllers::MasterController masterController(nullptr, new cm::framework::ObjectFactory());
 
     QQmlApplicationEngine engine;
     engine.addImportPath("qrc:/");

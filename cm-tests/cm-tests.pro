@@ -1,7 +1,7 @@
 include(../qmake-target-platform.pri)
 include(../qmake-destination-path.pri)
 
-QT += testlib
+QT += testlib network
 QT -= gui
 
 DESTDIR = $$PWD/../binaries/$$DESTINATION_PATH

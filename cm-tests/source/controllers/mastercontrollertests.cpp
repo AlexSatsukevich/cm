@@ -7,6 +7,7 @@ static MasterControllerTests instance;
 
 MasterControllerTests::MasterControllerTests()
     : TestSuite( "MasterControllerTests" )
+    , masterController(this, nullptr)
 {
 }
 }

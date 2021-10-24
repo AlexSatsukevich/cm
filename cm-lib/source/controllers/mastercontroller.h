@@ -5,9 +5,10 @@
 #include <QScopedPointer>
 
 #include <cm-lib_global.h>
-#include <controllers/databasecontroller.h>
-#include <controllers/commandcontroller.h>
-#include <controllers/navigationcontroller.h>
+#include <controllers/idatabasecontroller.h>
+#include <controllers/icommandcontroller.h>
+#include <controllers/inavigationcontroller.h>
+#include <framework/iobjectfactory.h>
 #include <models/client.h>
 #include <models/clientsearch.h>
 #include <rss/rsschannel.h>
@@ -19,20 +20,20 @@ class CMLIB_EXPORT MasterController : public QObject
 {
     Q_OBJECT
     Q_PROPERTY( QString ui_welcomeMessage READ welcomeMessage CONSTANT )
-    Q_PROPERTY( cm::controllers::DatabaseController* ui_databaseController READ databaseController CONSTANT )
-    Q_PROPERTY( cm::controllers::NavigationController* ui_navigationController READ navigationController CONSTANT )
-    Q_PROPERTY( cm::controllers::CommandController* ui_commandController READ commandController CONSTANT )
+    Q_PROPERTY( cm::controllers::IDatabaseController* ui_databaseController READ databaseController CONSTANT )
+    Q_PROPERTY( cm::controllers::INavigationController* ui_navigationController READ navigationController CONSTANT )
+    Q_PROPERTY( cm::controllers::ICommandController* ui_commandController READ commandController CONSTANT )
     Q_PROPERTY( cm::models::Client* ui_newClient READ newClient CONSTANT )
     Q_PROPERTY( cm::models::ClientSearch* ui_clientSearch READ clientSearch CONSTANT )
     Q_PROPERTY( cm::rss::RssChannel* ui_rssChannel READ rssChannel NOTIFY rssChannelChanged )
 
 public:
-    explicit MasterController(QObject *parent = nullptr);
+    MasterController(QObject *parent, framework::IObjectFactory *objectFactory);
     ~MasterController();
 
-    DatabaseController* databaseController();
-    NavigationController* navigationController();
-    CommandController* commandController();
+    IDatabaseController* databaseController();
+    INavigationController* navigationController();
+    ICommandController* commandController();
     const QString& welcomeMessage() const;
 
     models::Client *newClient();

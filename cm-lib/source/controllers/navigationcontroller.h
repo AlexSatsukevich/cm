@@ -5,23 +5,18 @@
 
 #include <cm-lib_global.h>
 #include <models/client.h>
+#include "controllers/inavigationcontroller.h"
 
 namespace cm {
 namespace controllers {
 
-class CMLIB_EXPORT NavigationController : public QObject
+class CMLIB_EXPORT NavigationController : public INavigationController
 {
     Q_OBJECT
 public:
     explicit NavigationController(QObject* _parent = nullptr)
-        : QObject(_parent)
+        : INavigationController(_parent)
     {}
-signals:
-    void goCreateClientView();
-    void goDashboardView();
-    void goEditClientView(cm::models::Client* client);
-    void goFindClientView();
-    void goRssView();
 };
 
 }

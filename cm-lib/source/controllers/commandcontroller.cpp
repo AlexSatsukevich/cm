@@ -12,7 +12,8 @@ namespace controllers {
 class CommandController::Implementation
 {
 public:
-    Implementation(CommandController* _commandController, NavigationController* _navigationController,
+    Implementation(CommandController* _commandController,
+                   INavigationController* _navigationController,
                    IDatabaseController* _databaseController, Client* _newClient,
                    models::ClientSearch* _clientSearch,
                    networking::IWebRequest* _webRequest)
@@ -49,7 +50,7 @@ public:
     QList<Command*> findClientViewContextCommands{};
     QList<Command*> editClientViewContextCommands{};
     QList<Command*> rssViewContextCommands{};
-    NavigationController* navigationController{nullptr};
+    INavigationController* navigationController{nullptr};
     IDatabaseController* databaseController{nullptr};
     Client* newClient{nullptr};
     Client* selectedClient{nullptr};
@@ -57,11 +58,13 @@ public:
     networking::IWebRequest *rssWebRequest{nullptr};
 };
 
-CommandController::CommandController(QObject* parent, NavigationController* navigationController,
-                                     IDatabaseController* databaseController, Client* newClient,
+CommandController::CommandController(QObject* parent,
+                                     INavigationController* navigationController,
+                                     IDatabaseController* databaseController,
+                                     Client* newClient,
                                      models::ClientSearch* clientSearch,
                                      networking::IWebRequest* webRequest)
-    : QObject(parent)
+    : ICommandController(parent)
 {
     implementation.reset(new Implementation(this, navigationController, databaseController, newClient, clientSearch, webRequest));
 }

@@ -35,6 +35,7 @@ SOURCES += source/models/client.cpp \
     source/data/intdecorator.cpp \
     source/data/stringdecorator.cpp \
     source/framework/command.cpp \
+    source/framework/objectfactory.cpp \
     source/models/address.cpp \
     source/models/appointment.cpp \
     source/models/clientsearch.cpp \
@@ -50,7 +51,9 @@ HEADERS += \
     source/cm-lib_global.h \
     source/controllers/commandcontroller.h \
     source/controllers/databasecontroller.h \
+    source/controllers/icommandcontroller.h \
     source/controllers/idatabasecontroller.h \
+    source/controllers/inavigationcontroller.h \
     source/controllers/mastercontroller.h \
     source/controllers/navigationcontroller.h \
     source/data/datadecorator.h \
@@ -61,6 +64,8 @@ HEADERS += \
     source/data/intdecorator.h \
     source/data/stringdecorator.h \
     source/framework/command.h \
+    source/framework/iobjectfactory.h \
+    source/framework/objectfactory.h \
     source/models/address.h \
     source/models/appointment.h \
     source/models/client.h \

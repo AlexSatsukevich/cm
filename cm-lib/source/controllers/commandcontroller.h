@@ -5,16 +5,17 @@
 #include <QtQml/QQmlListProperty>
 #include <cm-lib_global.h>
 #include <framework/command.h>
-#include "navigationcontroller.h"
+#include "inavigationcontroller.h"
 #include "idatabasecontroller.h"
 #include "models/client.h"
 #include "models/clientsearch.h"
 #include "networking/iwebrequest.h"
+#include "controllers/icommandcontroller.h"
 
 namespace cm {
 namespace controllers {
 
-class CMLIB_EXPORT CommandController: public QObject
+class CMLIB_EXPORT CommandController: public ICommandController
 {
     Q_OBJECT
     Q_PROPERTY(QQmlListProperty<cm::framework::Command> ui_createClientViewContextCommands READ ui_createClientViewContextCommands CONSTANT)
@@ -23,7 +24,7 @@ class CMLIB_EXPORT CommandController: public QObject
     Q_PROPERTY(QQmlListProperty<cm::framework::Command> ui_rssViewContextCommands READ ui_rssViewContextCommands CONSTANT)
 public:
     explicit CommandController(QObject* _parent = nullptr,
-                               NavigationController* _navigationController = nullptr,
+                               INavigationController* _navigationController = nullptr,
                                IDatabaseController* _databaseController = nullptr,
                                models::Client* _newClient = nullptr,
                                models::ClientSearch* _clientSearch = nullptr,
@@ -31,19 +32,19 @@ public:
 
     ~CommandController();
 
-    QQmlListProperty<framework::Command> ui_createClientViewContextCommands();
-    QQmlListProperty<framework::Command> ui_findClientViewContextCommands();
-    QQmlListProperty<framework::Command> ui_editClientViewContextCommands();
-    QQmlListProperty<framework::Command> ui_rssViewContextCommands();
+    QQmlListProperty<framework::Command> ui_createClientViewContextCommands() override;
+    QQmlListProperty<framework::Command> ui_findClientViewContextCommands() override;
+    QQmlListProperty<framework::Command> ui_editClientViewContextCommands() override;
+    QQmlListProperty<framework::Command> ui_rssViewContextCommands() override;
 
 public slots:
-    void onCreateClientSaveExecuted();
-    void onFindClientSearchExecuted();
-    void onEditClientSaveExecuted();
-    void onEditClientDeleteExecuted();
-    void onRssRefreshExecuted();
+    void onCreateClientSaveExecuted() override;
+    void onFindClientSearchExecuted() override;
+    void onEditClientSaveExecuted() override;
+    void onEditClientDeleteExecuted() override;
+    void onRssRefreshExecuted() override;
 
-    void setSelectedClient(cm::models::Client*);
+    void setSelectedClient(cm::models::Client*) override;
 
 private:
     class Implementation;
