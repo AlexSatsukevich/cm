@@ -2,6 +2,9 @@ pragma Singleton
 import QtQuick 2.0
 
 Item {
+    readonly property real widthWindow: 1920
+    readonly property real heightWindow: 1080
+
     readonly property color colourNavigationBarBackground: "#000000"
     readonly property color colourNavigationBarFont: "#ffffff"
     readonly property int pixelSizeNavigationBarIcon: 42
@@ -29,7 +32,7 @@ Item {
     readonly property real widthCommandButton: 80
     readonly property real heightCommandButton: widthCommandButton
 
-    readonly property real sizeScreenMargin: 20
+    readonly property real sizeScreenMargin: tscale(20)
     readonly property color colourDataControlsBackground: "#ffffff"
     readonly property color colourDataControlsFont: "#131313"
     readonly property int pixelSizeDataControls: 18
@@ -53,6 +56,19 @@ Item {
     readonly property color colorItemDateFont: "#636363"
     readonly property color colorItemTitleFont: "#131313"
     readonly property real sizeItemMargin: 5
+
+    readonly property real widthWindowReference: 1920
+    readonly property real heightWindowReference: 1080
+
+    function hscale(size) {
+        return Math.round(size * (widthWindow / widthWindowReference))
+    }
+    function vscale(size) {
+        return Math.round(size * (heightWindow / heightWindowReference))
+    }
+    function tscale(size) {
+        return Math.round((hscale(size) + vscale(size)) / 2)
+    }
 
     FontLoader {
         id: fontAwesomeLoader
