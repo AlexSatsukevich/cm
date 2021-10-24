@@ -2,7 +2,7 @@ include(../qmake-target-platform.pri)
 include(../qmake-destination-path.pri)
 
 QT -= gui
-QT += sql network
+QT += sql network xml
 
 DESTDIR = $$PWD/../binaries/$$DESTINATION_PATH
 OBJECTS_DIR = $$PWD/build/$$DESTINATION_PATH/.obj
@@ -40,7 +40,11 @@ SOURCES += source/models/client.cpp \
     source/models/clientsearch.cpp \
     source/models/contact.cpp \
     source/networking/networkaccessmanager.cpp \
-    source/networking/webrequest.cpp
+    source/networking/webrequest.cpp \
+    source/rss/rsschannel.cpp \
+    source/rss/rssimage.cpp \
+    source/rss/rssitem.cpp \
+    source/utilities/xmlhelper.cpp
 
 HEADERS += \
     source/cm-lib_global.h \
@@ -65,7 +69,11 @@ HEADERS += \
     source/networking/inetworkaccessmanager.h \
     source/networking/iwebrequest.h \
     source/networking/networkaccessmanager.h \
-    source/networking/webrequest.h
+    source/networking/webrequest.h \
+    source/rss/rsschannel.h \
+    source/rss/rssimage.h \
+    source/rss/rssitem.h \
+    source/utilities/xmlhelper.h
 
 # Default rules for deployment.
 unix {

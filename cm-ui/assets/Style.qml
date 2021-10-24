@@ -14,7 +14,7 @@ Item {
     readonly property real heightNavigationButton: Math.max(heightNavigationButtonIcon, heightNavigationButtonDescription)
 
     readonly property real widthNavigationBarCollapsed: widthNavigationButtonIcon
-    readonly property real heightNavigationBarExpanded: widthNavigationButton    
+    readonly property real heightNavigationBarExpanded: widthNavigationButton
 
     readonly property  color colourBackground: "#efefef"
     property alias fontAwesome: fontAwesomeLoader.name
@@ -47,6 +47,12 @@ Item {
     readonly property real sizeShadowOffset: 5
     readonly property color colourShadow: "#dedede"
 
+    readonly property color colourItemBackground: "#fefefe"
+    readonly property color colourItemBackgroundHover: "#efefef"
+    readonly property color colorItemBorder: "#efefef"
+    readonly property color colorItemDateFont: "#636363"
+    readonly property color colorItemTitleFont: "#131313"
+    readonly property real sizeItemMargin: 5
 
     FontLoader {
         id: fontAwesomeLoader

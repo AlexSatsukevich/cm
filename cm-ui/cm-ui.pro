@@ -1,7 +1,7 @@
 include(../qmake-target-platform.pri)
 include(../qmake-destination-path.pri)
 
-QT += qml quick
+QT += qml quick xml
 
 DESTDIR = $$PWD/../binaries/$$DESTINATION_PATH
 OBJECTS_DIR = $$PWD/build/$$DESTINATION_PATH/.obj

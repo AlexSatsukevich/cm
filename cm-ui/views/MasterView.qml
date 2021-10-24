@@ -6,8 +6,8 @@ import assets 1.0
 import components 1.0
 
 Window {
-    width: 640
-    height: 480
+    width: 1000
+    height: 600
     visible: true
     title: qsTr("Client Management")
 

@@ -10,6 +10,7 @@
 #include <controllers/navigationcontroller.h>
 #include <models/client.h>
 #include <models/clientsearch.h>
+#include <rss/rsschannel.h>
 
 namespace cm {
 namespace controllers {
@@ -23,6 +24,7 @@ class CMLIB_EXPORT MasterController : public QObject
     Q_PROPERTY( cm::controllers::CommandController* ui_commandController READ commandController CONSTANT )
     Q_PROPERTY( cm::models::Client* ui_newClient READ newClient CONSTANT )
     Q_PROPERTY( cm::models::ClientSearch* ui_clientSearch READ clientSearch CONSTANT )
+    Q_PROPERTY( cm::rss::RssChannel* ui_rssChannel READ rssChannel NOTIFY rssChannelChanged )
 
 public:
     explicit MasterController(QObject *parent = nullptr);
@@ -35,10 +37,14 @@ public:
 
     models::Client *newClient();
     models::ClientSearch *clientSearch();
+    rss::RssChannel *rssChannel();
+
+signals:
+    void rssChannelChanged();
 
 public slots:
     void selectClient(cm::models::Client *client);
-    void onRssReplyReceived(int statusCode, QByteArray body);
+    void onRssReplyReceived(int statusCode, QByteArray body);    
 
 private:
     class Implementation;
