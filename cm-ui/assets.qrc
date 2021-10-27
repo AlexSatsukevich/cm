@@ -3,5 +3,6 @@
         <file alias="Style.qml">assets/Style.qml</file>
         <file alias="qmldir">assets/qmldir</file>
         <file alias="fontawesome.tff">assets/fontawesome-webfont.ttf</file>
+        <file alias="logo.jpeg">assets/logo.jpeg</file>
     </qresource>
 </RCC>

@@ -60,6 +60,11 @@ Item {
     readonly property real widthWindowReference: 1920
     readonly property real heightWindowReference: 1080
 
+    readonly property color colourDashboardBackground: "#f36f24"
+    readonly property color colourDashboardFont: "#ffffff"
+    readonly property int pixelSizeDashboard: tscale(36)
+    readonly property real sizeDashboardLogo: tscale(500)
+
     function hscale(size) {
         return Math.round(size * (widthWindow / widthWindowReference))
     }

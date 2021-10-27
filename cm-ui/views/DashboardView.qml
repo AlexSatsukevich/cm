@@ -4,10 +4,22 @@ import assets 1.0
 Item {
     Rectangle {
         anchors.fill: parent
-        color: Style.colourBackground
-        Text {
+        color: Style.colourDashboardBackground
+        Image {
+            id: logo
+            source: "qrc:/assets/logo.jpeg"
             anchors.centerIn: parent
-            text: qsTr("Dashboard View")
+            width: Style.sizeDashboardLogo
+            height: Style.sizeDashboardLogo
+        }
+        Text {
+            anchors {
+                top: logo.bottom
+                horizontalCenter: logo.horizontalCenter
+            }
+            text: "Client Management System"
+            color: Style.colourDashboardFont
+            font.pixelSize: Style.pixelSizeDashboard
         }
     }
 }
