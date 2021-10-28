@@ -40,6 +40,9 @@ public:
     QQmlListProperty<cm::models::Appointment> ui_appointments();
     QQmlListProperty<cm::models::Contact> ui_contacts();
 
+public slots:
+    void addContact();
+
 signals:
     void appointmentsChanged();
     void contactsChanged();

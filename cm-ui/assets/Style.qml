@@ -65,6 +65,11 @@ Item {
     readonly property int pixelSizeDashboard: tscale(36)
     readonly property real sizeDashboardLogo: tscale(500)
 
+    readonly property color colourDataSelectorBackground: "#131313"
+    readonly property color colourDataControlsBackgroundSelected: "#f36f24"
+    readonly property color colourDataSelectorFont: "#ffffff"
+    readonly property int sizeDataControlsRadius: tscale(5)
+
     function hscale(size) {
         return Math.round(size * (widthWindow / widthWindowReference))
     }

@@ -33,4 +33,10 @@ QQmlListProperty<Contact> Client::ui_contacts()
     return QQmlListProperty<Contact>(this, &contacts->derivedEntities());
 }
 
+void Client::addContact()
+{
+    contacts->addEntity(new Contact(this));
+    emit contactsChanged();
+}
+
 }}
